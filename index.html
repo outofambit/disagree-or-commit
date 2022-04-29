@@ -31,7 +31,25 @@
         "distract",
         "desire",
         "disentangle",
+        "delouse",
+        "drag it out",
+        "don't worry",
+        "dig in"
       ];
+
+      const commitReplacements = [
+        "comply",
+        "contradict",
+        "co-opt",
+        "create",
+        "co-regulate",
+        "crush",
+        "cuddle",
+        "crave disagreement",
+        "collate",
+        "carve up"
+      ];
+
       const disagreeClickHandler = function (element, event) {
         const newWordIndex = getRandomIntInclusive(
           0,
@@ -45,16 +63,6 @@
         .getElementById("disagree")
         .addEventListener("click", disagreeClickHandler);
 
-      const commitReplacements = [
-        "comply",
-        "contradict",
-        "co-opt",
-        "create",
-        "co-regulate",
-        "crush",
-        "cuddle",
-        "cup",
-      ];
       const commitClickHandler = function (element, event) {
         const newWordIndex = getRandomIntInclusive(
           0,
