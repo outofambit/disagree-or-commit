@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+
+<head>
+  <title>surprise and</title>
+  <link rel="stylesheet" href="./style.css">
+</head>
+
+<body>
+  <div class="phrase" aria-live="polite" aria-atomic="true">Surprise and <span id="delight" role="button" tabindex="0">delight</span></div>
+  <script>
+    const run = () => {
+      // stole from MDN
+      function getRandomIntInclusive(min, max) {
+        min = Math.ceil(min);
+        max = Math.floor(max);
+        return Math.floor(Math.random() * (max - min + 1) + min); //The maximum is inclusive and the minimum is inclusive
+      }
+
+      let listsIndex = 0;
+      const bleghs = [
+        "depose",
+        "disappoint",
+        "deter",
+        "desist",
+        "dick around",
+        "depress",
+        "distract",
+        "no dice",
+        "destroy",
+      ];
+      const celebrities = [
+        "Claire Daines",
+        "Danny DeVito",
+        "Doug Dimmadome, owner of the Dimmsdale Dimmadome",
+        "Ellen DeGeneres",
+        "Darkwing Duck",
+        "Dwayne \"The Rock\" Johnson",
+        "Diane Sawyer",
+        "D'Lo",
+        "Laura Dern",
+        "Taye Diggs",
+        "Doja Cat"
+      ];
+      const odds = [
+        "dinosaur bones",
+        "dine",
+        "reprise",
+        "decompose",
+        "doge",
+        "Diners, Drive-ins, and Dives",
+        "dumplings",
+        "drag"
+      ];
+      const lists = [bleghs, celebrities, odds];
+      const clickHandler = function (element, event) {
+        const newWordIndex = getRandomIntInclusive(
+          0,
+          lists[listsIndex].length - 1
+        );
+        document.getElementById("delight").textContent =
+          lists[listsIndex][newWordIndex];
+        listsIndex++;
+        if (listsIndex > lists.length - 1) listsIndex = 0;
+      };
+      document
+        .getElementById("delight")
+        .addEventListener("click", clickHandler);
+    };
+    run();
+  </script>
+</body>
