@@ -2,11 +2,19 @@
 
 <head>
   <title>surprise and</title>
-  <link rel="stylesheet" href="./style.css">
+  <link rel="stylesheet" href="./style.css" />
 </head>
 
 <body>
-  <div class="phrase" aria-live="polite" aria-atomic="true">Surprise and <span id="delight" role="button" tabindex="0">delight</span></div>
+  <div class="phrase" aria-live="polite" aria-atomic="true">
+    <span id="disagree" class="clickableWord" role="button" tabindex="0"
+      >disagree</span
+    >
+    and
+    <span id="commit" class="clickableWord" role="button" tabindex="0"
+      >commit</span
+    >
+  </div>
   <script>
     const run = () => {
       // stole from MDN
@@ -16,56 +24,51 @@
         return Math.floor(Math.random() * (max - min + 1) + min); //The maximum is inclusive and the minimum is inclusive
       }
 
-      let listsIndex = 0;
-      const bleghs = [
-        "depose",
+      const disagreeReplacements = [
         "disappoint",
         "deter",
-        "desist",
-        "dick around",
         "depress",
         "distract",
-        "no dice",
-        "destroy",
+        "desire",
+        "disentangle",
       ];
-      const celebrities = [
-        "Claire Daines",
-        "Danny DeVito",
-        "Doug Dimmadome, owner of the Dimmsdale Dimmadome",
-        "Ellen DeGeneres",
-        "Darkwing Duck",
-        "Dwayne \"The Rock\" Johnson",
-        "Diane Sawyer",
-        "D'Lo",
-        "Laura Dern",
-        "Taye Diggs",
-        "Doja Cat"
-      ];
-      const odds = [
-        "dinosaur bones",
-        "dine",
-        "reprise",
-        "decompose",
-        "doge",
-        "Diners, Drive-ins, and Dives",
-        "dumplings",
-        "drag"
-      ];
-      const lists = [bleghs, celebrities, odds];
-      const clickHandler = function (element, event) {
+      const disagreeClickHandler = function (element, event) {
         const newWordIndex = getRandomIntInclusive(
           0,
-          lists[listsIndex].length - 1
+          disagreeReplacements.length - 1
         );
-        document.getElementById("delight").textContent =
-          lists[listsIndex][newWordIndex];
-        listsIndex++;
-        if (listsIndex > lists.length - 1) listsIndex = 0;
+        document.getElementById("commit").textContent = "commit";
+        document.getElementById("disagree").textContent =
+          disagreeReplacements[newWordIndex];
       };
       document
-        .getElementById("delight")
-        .addEventListener("click", clickHandler);
+        .getElementById("disagree")
+        .addEventListener("click", disagreeClickHandler);
+
+      const commitReplacements = [
+        "comply",
+        "contradict",
+        "co-opt",
+        "create",
+        "co-regulate",
+        "crush",
+        "cuddle",
+        "cup",
+      ];
+      const commitClickHandler = function (element, event) {
+        const newWordIndex = getRandomIntInclusive(
+          0,
+          commitReplacements.length - 1
+        );
+        document.getElementById("disagree").textContent = "disagree";
+        document.getElementById("commit").textContent =
+          commitReplacements[newWordIndex];
+      };
+      document
+        .getElementById("commit")
+        .addEventListener("click", commitClickHandler);
     };
+
     run();
   </script>
 </body>

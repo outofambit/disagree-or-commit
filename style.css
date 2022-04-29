@@ -8,6 +8,6 @@ body {
   p {
     margin: 0;
   }
-  #delight {
+  .clickableWord {
     color: blue;
   }
