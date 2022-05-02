@@ -10,4 +10,5 @@ body {
   }
   .clickableWord {
     color: blue;
+    text-decoration: underline;
   }

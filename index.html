@@ -7,75 +7,89 @@
 
 <body>
   <div class="phrase" aria-live="polite" aria-atomic="true">
-    <span id="disagree" class="clickableWord" role="button" tabindex="0"
-      >disagree</span
-    >
+    <span id="disagree" class="clickableWord" role="button" tabindex="0">disagree</span>
     and
-    <span id="commit" class="clickableWord" role="button" tabindex="0"
-      >commit</span
-    >
+    <span id="commit" class="clickableWord" role="button" tabindex="0">commit</span>
   </div>
   <script>
     const run = () => {
-      // stole from MDN
-      function getRandomIntInclusive(min, max) {
-        min = Math.ceil(min);
-        max = Math.floor(max);
-        return Math.floor(Math.random() * (max - min + 1) + min); //The maximum is inclusive and the minimum is inclusive
+
+      // stolen from https://dev.to/codebubb/how-to-shuffle-an-array-in-javascript-2ikj
+      const shuffleArray = (array) => {
+        for (let i = array.length - 1; i > 0; i--) {
+          const j = Math.floor(Math.random() * (i + 1));
+          const temp = array[i];
+          array[i] = array[j];
+          array[j] = temp;
+        }
       }
 
-      const disagreeReplacements = [
-        "disappoint",
-        "deter",
-        "depress",
-        "distract",
-        "desire",
-        "disentangle",
-        "delouse",
-        "drag it out",
-        "don't worry",
-        "dig in"
-      ];
+      const setupDisagreementReplacements = () => {
+        const disagreeReplacements = [
+          "disappoint",
+          "deter",
+          "depress",
+          "distract",
+          "desire",
+          "disentangle",
+          "delouse",
+          "drag it out",
+          "don't worry",
+          "dig in"
+        ];
+        shuffleArray(disagreeReplacements);
+        let disagreeReplacementsIndex = 0;
+        const disagreeClickHandler = function (element, event) {
+          document.getElementById("commit").textContent = "commit";
+          document.getElementById("disagree").textContent =
+            disagreeReplacements[disagreeReplacementsIndex];
+          // update for next time
+          disagreeReplacementsIndex++;
+          if (disagreeReplacementsIndex > disagreeReplacements.length - 1) {
+            shuffleArray(disagreeReplacements)
+            disagreeReplacementsIndex = 0
+          }
+        };
+        document
+          .getElementById("disagree")
+          .addEventListener("click", disagreeClickHandler);
+      }
 
-      const commitReplacements = [
-        "comply",
-        "contradict",
-        "co-opt",
-        "create",
-        "co-regulate",
-        "crush",
-        "cuddle",
-        "crave disagreement",
-        "collate",
-        "carve up"
-      ];
+      const setupCommitReplacements = () => {
+        const commitReplacements = [
+          "comply",
+          "contradict",
+          "co-opt",
+          "create",
+          "co-regulate",
+          "crush",
+          "cuddle",
+          "crave disagreement",
+          "collate",
+          "carve up"
+        ];
+        shuffleArray(commitReplacements);
+        let commitReplacementsIndex = 0;
 
-      const disagreeClickHandler = function (element, event) {
-        const newWordIndex = getRandomIntInclusive(
-          0,
-          disagreeReplacements.length - 1
-        );
-        document.getElementById("commit").textContent = "commit";
-        document.getElementById("disagree").textContent =
-          disagreeReplacements[newWordIndex];
+        const commitClickHandler = function (element, event) {
+          document.getElementById("disagree").textContent = "disagree";
+          document.getElementById("commit").textContent =
+            commitReplacements[commitReplacementsIndex];
+          // update for next time
+          commitReplacementsIndex++;
+          if (commitReplacementsIndex > commitReplacements.length - 1) {
+            shuffleArray(commitReplacements)
+            commitReplacementsIndex = 0
+          }
+        };
+        document
+          .getElementById("commit")
+          .addEventListener("click", commitClickHandler);
       };
-      document
-        .getElementById("disagree")
-        .addEventListener("click", disagreeClickHandler);
 
-      const commitClickHandler = function (element, event) {
-        const newWordIndex = getRandomIntInclusive(
-          0,
-          commitReplacements.length - 1
-        );
-        document.getElementById("disagree").textContent = "disagree";
-        document.getElementById("commit").textContent =
-          commitReplacements[newWordIndex];
-      };
-      document
-        .getElementById("commit")
-        .addEventListener("click", commitClickHandler);
-    };
+      setupDisagreementReplacements();
+      setupCommitReplacements();
+    }
 
     run();
   </script>
